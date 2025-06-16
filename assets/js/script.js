@@ -51,6 +51,14 @@ lightbox.addEventListener('click', (e) => {
     }
 });
 
+// 背景クリックで閉じる
+lightbox.addEventListener('click', (e) => {
+    // 画像以外の部分（背景）をクリックした場合のみ閉じる
+    if (e.target === lightbox || !e.target.matches('img')) {
+        closeLightbox();
+    }
+});
+
 // ESCキーで閉じる
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox.classList.contains('active')) {
@@ -58,13 +66,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// パララックス効果（オプション）
-document.addEventListener('mousemove', (e) => {
-    const x = e.clientX / window.innerWidth - 0.5;
-    const y = e.clientY / window.innerHeight - 0.5;
 
-    document.body.style.transform = `translateX(${x * 10}px) translateY(${y * 10}px)`;
-});
 
 // タブのスクロール追従
 const tabsContainer = document.querySelector('.tabs');
